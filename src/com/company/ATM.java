@@ -63,7 +63,6 @@ public class ATM {
 
     // create a method to search the match
     public static Account selectAccount(ArrayList<Account> accounts) {
-
         Scanner s = new Scanner(System.in);
 
         System.out.println("Enter your account number");
@@ -77,9 +76,29 @@ public class ATM {
             }
         }
 
-        return null;
+        System.out.println("Account/PIN not found - please create");
+        Account newAccount = addNewAccount(acc, pin);
+        accounts.add(newAccount);
 
-        }
+        return newAccount;
+    }
+
+    public static Account addNewAccount(String accountNumber, String pinCode) {
+        // -- no account found - create new one
+        Account newAcct = new Account();
+
+        Scanner s = new Scanner(System.in);
+
+        System.out.println("Enter your name");
+        String userName = s.nextLine();
+        newAcct.setUserName(userName);
+
+        System.out.println("Enter your balance");
+        String balance = s.nextLine();
+        newAcct.setBalance(Double.parseDouble(balance));
+
+        return newAcct;
+    }
 
     public static void main(String[] args) {
         ATM.run();
